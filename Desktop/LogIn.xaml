@@ -49,7 +49,7 @@
                            HorizontalAlignment="Left" Margin="152,0,0,0" Foreground="#313131"/>
             </Grid>
             <Grid Grid.Row="6">
-                <Button Name="LogInButton" Width="326" Height="48" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,5" FontSize="18" FontFamily="Actor" Background="#F96060">
+                <Button Name="LogInButton" Width="326" Height="48" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,5" FontSize="18" FontFamily="Actor" Background="#F96060" Click="LogInButton_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}" 

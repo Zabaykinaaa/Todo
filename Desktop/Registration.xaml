@@ -64,7 +64,7 @@
                 <Line X1="0" Y1="0" X2="326" Y2="0" Stroke="#EDEDED" StrokeThickness="3" HorizontalAlignment="Left" Margin="1,34,0,0"/>
             </Grid>
             <Grid Grid.Row="9">
-                <Button Name="RegistrationButton" Width="326" Height="48" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,5" FontSize="18" FontFamily="Actor" Background="#F96060">
+                <Button Name="RegistrationButton" Width="326" Height="48" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,5" FontSize="18" FontFamily="Actor" Background="#F96060" Click="RegistrationButton_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}" 

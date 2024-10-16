@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,46 @@ namespace Desktop
         public Registration()
         {
             InitializeComponent();
+        }
+
+        public void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (UserName.Text.Length < 3)
+                {
+                    throw new ArgumentException("Имя пользователя должно содержать не менее трех знаков");
+                }
+
+                var MailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                if (!Regex.IsMatch(Mail.Text, MailPattern))
+                {
+                    throw new ArgumentException("Введена некорректная почта");
+                }                
+
+                if (Password.Text.Length < 6)
+                {
+                    throw new ArgumentException("Пароль должен содержать не менее шести символов");
+                }
+
+                if (ConfirmPassword.Text.Length < 6)
+                {
+                    throw new ArgumentException("Пароль должен содержать не менее шести символов");
+                }
+
+                if (Password.Text != ConfirmPassword.Text)
+                {
+                    throw new ArgumentException("Пароль и его подтверждение должны совпадать");
+                }
+
+                MainEmpty mainEmpty = new MainEmpty();
+                mainEmpty.Show();
+                this.Hide();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }           
         }
 
         public void BackButton_Click (object sender, RoutedEventArgs e)

@@ -25,6 +25,11 @@ namespace Desktop
             InitializeComponent();
         }
 
+        public void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            //        
+        }
+
         public void RegistrationButton_Click (object sender, RoutedEventArgs e)
         {
             Registration registration = new Registration();
