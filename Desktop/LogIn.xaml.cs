@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,20 +52,31 @@ namespace Desktop
 
         public void Password_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (Password.Text == "Введите пароль")
+            if (Password.Password == "")
             {
-                Password.Text = "";
-                Password.Foreground = (Brush)new BrushConverter().ConvertFromString("#313131");
+                PasswordPlaceholder.Visibility = Visibility.Hidden;
             }
         }
 
         public void Password_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (Password.Text == "")
+            if (Password.Password == "")
             {
-                Password.Foreground = (Brush)new BrushConverter().ConvertFromString("#C6C6C6");
-                Password.Text = "Введите пароль";
+                PasswordPlaceholder.Visibility = Visibility.Visible;
             }
         }
+
+        public void Password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (Password.Password != "")
+            {
+                PasswordPlaceholder.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                PasswordPlaceholder.Visibility = Visibility.Visible;
+            }
+        }
+
     }
 }
