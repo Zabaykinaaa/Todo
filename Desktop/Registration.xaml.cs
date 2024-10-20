@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,47 +24,7 @@ namespace Desktop
             InitializeComponent();
         }
 
-        public void RegistrationButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (UserName.Text.Length < 3)
-                {
-                    throw new ArgumentException("Имя пользователя должно содержать не менее трех знаков");
-                }
-
-                var MailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-                if (!Regex.IsMatch(Mail.Text, MailPattern))
-                {
-                    throw new ArgumentException("Введена некорректная почта");
-                }                
-
-                if (Password.Text.Length < 6)
-                {
-                    throw new ArgumentException("Пароль должен содержать не менее шести символов");
-                }
-
-                if (ConfirmPassword.Text.Length < 6)
-                {
-                    throw new ArgumentException("Пароль должен содержать не менее шести символов");
-                }
-
-                if (Password.Text != ConfirmPassword.Text)
-                {
-                    throw new ArgumentException("Пароль и его подтверждение должны совпадать");
-                }
-
-                MainEmpty mainEmpty = new MainEmpty();
-                mainEmpty.Show();
-                this.Hide();
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }           
-        }
-
-        public void BackButton_Click (object sender, RoutedEventArgs e)
+        public void BackButton_Click(object sender, RoutedEventArgs e)
         {
             LogIn logIn = new LogIn();
             logIn.Show();
@@ -110,37 +69,57 @@ namespace Desktop
 
         public void Password_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (Password.Text == "Введите пароль")
+            if (Password.Password == "")
             {
-                Password.Text = "";
-                Password.Foreground = (Brush)new BrushConverter().ConvertFromString("#313131");
+                PasswordPlaceholder.Visibility = Visibility.Hidden;
             }
         }
 
         public void Password_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (Password.Text == "")
+            if (Password.Password == "")
             {
-                Password.Foreground = (Brush)new BrushConverter().ConvertFromString("#C6C6C6");
-                Password.Text = "Введите пароль";
+                PasswordPlaceholder.Visibility = Visibility.Visible;
             }
         }
 
-        public void ConfirmPassword_GotFocus(object sender, RoutedEventArgs e)
+        public void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (ConfirmPassword.Text == "Повторите пароль")
+            if (Password.Password != "")
             {
-                ConfirmPassword.Text = "";
-                ConfirmPassword.Foreground = (Brush)new BrushConverter().ConvertFromString("#313131");
+                PasswordPlaceholder.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                PasswordPlaceholder.Visibility = Visibility.Visible;
             }
         }
 
-        public void ConfirmPassword_LostFocus(object sender, RoutedEventArgs e)
+        public void PasswordConfirm_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (ConfirmPassword.Text == "")
+            if (PasswordConfirm.Password == "")
             {
-                ConfirmPassword.Foreground = (Brush)new BrushConverter().ConvertFromString("#C6C6C6");
-                ConfirmPassword.Text = "Повторите пароль";
+                PasswordConfirmPlaceholder.Visibility = Visibility.Hidden;
+            }
+        }
+
+        public void PasswordConfirm_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordConfirm.Password == "")
+            {
+                PasswordConfirmPlaceholder.Visibility = Visibility.Visible;
+            }
+        }
+
+        public void PasswordConfirm_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (PasswordConfirm.Password != "")
+            {
+                PasswordConfirmPlaceholder.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                PasswordConfirmPlaceholder.Visibility = Visibility.Visible;
             }
         }
     }
